@@ -84,8 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Loading the images for the gallery slider
   const IMAGES = [
+    "assets/gallery/PSU_Intramurals_Champ.jpg",
+    "assets/gallery/PSU_Intramurals_League.jpg",
     "assets/gallery/soccer1.jpg",
-    "assets/gallery/soccer2.jpg",
     "assets/gallery/cooking1.jpg",
     "assets/gallery/drone1.jpg",
     "assets/gallery/drone2.jpg",
