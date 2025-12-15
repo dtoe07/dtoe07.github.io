@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Loading the images for the gallery slider
+  // Loading the images for the gallery slider dynamically
   const IMAGES = [
     "assets/gallery/PSU_intramurals_champ.jpg",
     "assets/gallery/PSU_intramurals_league.jpg",
