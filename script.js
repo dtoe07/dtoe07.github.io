@@ -226,17 +226,27 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.addEventListener("click", () => {
       const trackWidth = track.scrollWidth;
       const containerWidth = container.offsetWidth;
-      const minX = -(trackWidth - containerWidth - 96); // Adjust for padding
+      // The minX calculation is simplified
+      const minX = -(trackWidth - containerWidth);
 
-      // Set the target position instead of directly changing currentX
-      state.targetX = Math.max(minX, state.targetX - scrollAmount);
+      // Calculate the next snap point to the left
+      const currentSnap = Math.round(state.targetX / scrollAmount);
+      const nextSnapX = (currentSnap - 1) * scrollAmount;
+
+      // Set the target position to the calculated snap point
+      state.targetX = Math.max(minX, nextSnapX);
     });
 
     prevBtn.addEventListener("click", () => {
+      // The boundary is now 0
       const maxX = 0;
 
-      // Set the target position instead of directly changing currentX
-      state.targetX = Math.min(maxX, state.targetX + scrollAmount);
+      // Calculate the next snap point to the right (simplified)
+      const currentSnap = Math.round(state.targetX / scrollAmount);
+      const prevSnapX = (currentSnap + 1) * scrollAmount;
+
+      // Set the target position to the calculated snap point
+      state.targetX = Math.min(maxX, prevSnapX);
     });
 
     container.addEventListener("mousedown", startDrag);

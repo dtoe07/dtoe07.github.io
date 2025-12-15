@@ -400,7 +400,7 @@ footer {
   cursor: grabbing;
 }
 
-/* he old gradient hints */
+/* The old gradient hints */
 /*
 .slider-gradient-left,
 .slider-gradient-right {
@@ -456,15 +456,14 @@ footer {
   right: 20px;
 }
 
-/* Ensure Font Awesome icons render correctly */
 .slider-btn .fas {
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
 }
 
 #slider-track {
-  padding: 0 96px;
   gap: 32px;
+  will-change: transform;
 }
 
 .img-card {
