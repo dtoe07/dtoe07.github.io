@@ -2,7 +2,7 @@
 
 This is the source code for my personal portfolio website.
 
-**Live Site:** [https://dtoe07.github.io/dtoe07/](https://dtoe07.github.io/dtoe07/)
+**Live Site:** [https://dtoe07.github.io/](https://dtoe07.github.io/)
 
 ## Key Features
 
@@ -19,7 +19,7 @@ This is a static website that can be hosted in any simple server with just front
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/dtoe07/dtoe07.git
+    git clone https://github.com/dtoe07/dtoe07.github.io.git
     ```
 2.  **Navigate to the project directory:**
     ```bash
