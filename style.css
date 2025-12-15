@@ -456,6 +456,12 @@ footer {
   right: 20px;
 }
 
+/* Ensure Font Awesome icons render correctly */
+.slider-btn .fas {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
 #slider-track {
   padding: 0 96px;
   gap: 32px;
