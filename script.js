@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       startX: 0,
       lastX: 0,
       velocity: 0,
+      targetX: 0,
       rafId: null,
       autoScrollDir: -1,
     };
@@ -147,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
       state.startX = getX(e) - state.currentX;
       state.lastX = getX(e);
       state.velocity = 0;
+      state.targetX = state.currentX; // Sync targetX on drag start
 
       container.classList.add("grabbing");
       container.classList.remove("grab");
@@ -164,6 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const delta = x - state.lastX;
       state.velocity = delta;
       state.lastX = x;
+      state.targetX = moveX; // Update targetX while dragging
 
       const trackWidth = track.scrollWidth;
       const containerWidth = container.offsetWidth;
@@ -181,36 +184,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const endDrag = () => {
       state.isDragging = false;
+      state.targetX = state.currentX; // Sync targetX on drag end
       container.classList.remove("grabbing");
       container.classList.add("grab");
     };
 
     const animate = () => {
+      // --- SMOOTHING LOGIC ---
+      // Move currentX towards targetX by a fraction each frame for a smooth effect
+      state.currentX += (state.targetX - state.currentX) * 0.1;
+
+      // Apply friction only when not dragging
       if (!state.isDragging) {
-        state.currentX += state.velocity;
         state.velocity *= config.friction;
+        state.targetX += state.velocity; // Apply velocity to the target for coasting
+      }
 
-        // --- AUTO-SCROLL LOGIC ---
-        // if (Math.abs(state.velocity) < 1 && !state.isHovering) {
-        //   state.currentX += config.autoSpeed * state.autoScrollDir;
-        // }
+      // --- Boundary checks
+      const trackWidth = track.scrollWidth;
+      const containerWidth = container.offsetWidth;
+      const minX = -(trackWidth - containerWidth);
+      const maxX = 0;
 
-        const trackWidth = track.scrollWidth;
-        const containerWidth = container.offsetWidth;
-        const minX = -(trackWidth - containerWidth);
-        const maxX = 0;
-
-        if (state.currentX > maxX) {
-          const force = (maxX - state.currentX) * config.bounce;
-          state.velocity += force;
-          state.velocity *= 0.9;
-          state.autoScrollDir = -1;
-        } else if (state.currentX < minX) {
-          const force = (minX - state.currentX) * config.bounce;
-          state.velocity += force;
-          state.velocity *= 0.9;
-          state.autoScrollDir = 1;
-        }
+      if (state.targetX > maxX) {
+        state.targetX = maxX;
+      } else if (state.targetX < minX) {
+        state.targetX = minX;
       }
 
       track.style.transform = `translateX(${state.currentX}px)`;
@@ -227,17 +226,17 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.addEventListener("click", () => {
       const trackWidth = track.scrollWidth;
       const containerWidth = container.offsetWidth;
-      const minX = -(trackWidth - containerWidth);
+      const minX = -(trackWidth - containerWidth - 96); // Adjust for padding
 
-      // Move left by the scroll amount, but don't go past the end
-      state.currentX = Math.max(minX, state.currentX - scrollAmount);
+      // Set the target position instead of directly changing currentX
+      state.targetX = Math.max(minX, state.targetX - scrollAmount);
     });
 
     prevBtn.addEventListener("click", () => {
       const maxX = 0;
 
-      // Move right by the scroll amount, but don't go past the start
-      state.currentX = Math.min(maxX, state.currentX + scrollAmount);
+      // Set the target position instead of directly changing currentX
+      state.targetX = Math.min(maxX, state.targetX + scrollAmount);
     });
 
     container.addEventListener("mousedown", startDrag);
