@@ -190,9 +190,10 @@ document.addEventListener("DOMContentLoaded", () => {
         state.currentX += state.velocity;
         state.velocity *= config.friction;
 
-        if (Math.abs(state.velocity) < 1 && !state.isHovering) {
-          state.currentX += config.autoSpeed * state.autoScrollDir;
-        }
+        // --- AUTO-SCROLL LOGIC ---
+        // if (Math.abs(state.velocity) < 1 && !state.isHovering) {
+        //   state.currentX += config.autoSpeed * state.autoScrollDir;
+        // }
 
         const trackWidth = track.scrollWidth;
         const containerWidth = container.offsetWidth;
@@ -216,7 +217,29 @@ document.addEventListener("DOMContentLoaded", () => {
       state.rafId = requestAnimationFrame(animate);
     };
 
-    // init event listeners for dragging and hovering
+    // --- Init ---
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    // Scroll amount for arrow clicks (width of a card + gap)
+    const scrollAmount = 400 + 32;
+
+    nextBtn.addEventListener("click", () => {
+      const trackWidth = track.scrollWidth;
+      const containerWidth = container.offsetWidth;
+      const minX = -(trackWidth - containerWidth);
+
+      // Move left by the scroll amount, but don't go past the end
+      state.currentX = Math.max(minX, state.currentX - scrollAmount);
+    });
+
+    prevBtn.addEventListener("click", () => {
+      const maxX = 0;
+
+      // Move right by the scroll amount, but don't go past the start
+      state.currentX = Math.min(maxX, state.currentX + scrollAmount);
+    });
+
     container.addEventListener("mousedown", startDrag);
     container.addEventListener("touchstart", startDrag);
 
