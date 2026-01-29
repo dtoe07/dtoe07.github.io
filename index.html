@@ -21,6 +21,10 @@
 
     <!-- Linking CSS -->
     <link rel="stylesheet" href="style.css" />
+    <!-- Linking flappy bird game CSS -->
+    <link rel="stylesheet" href="flappy.css" />
+    <!-- Linking flappy bird game JS -->
+    <script src="flappy.js" defer></script>
   </head>
   <body id="home">
     <!-- Navbar -->
@@ -338,6 +342,45 @@
         </div>
       </div>
     </section>
+
+    <!-- START OF GAME SECTION -->
+    <section id="life-journey-section" class="animate-on-scroll">
+      <div class="game-content-container">
+        <h2 class="game-heading">Lets Explore Oregon Trails!</h2>
+        <p class="game-subtitle">
+          Navigate through all the famous trails in Oregon. Tap or Spacebar to
+          jump!
+        </p>
+
+        <div id="game-wrapper">
+          <div id="score-board">0</div>
+
+          <!-- Memory Card Popup -->
+          <div id="memory-card">
+            <div id="memory-img-container">
+              <img id="memory-img" src="" alt="Memory" style="display: none" />
+              <div
+                id="memory-placeholder"
+                style="width: 100%; height: 100%"
+              ></div>
+            </div>
+            <p id="memory-title">Trail Name</p>
+          </div>
+
+          <div id="ui-layer">
+            <h2 id="game-title" style="font-size: 2rem; margin: 0">
+              Oregon Trail Journey
+            </h2>
+            <p id="game-message" style="margin: 10px 0">Avoid the obstacles!</p>
+            <button id="start-btn" class="game-btn">Start Exploring!</button>
+            <div class="game-instruction">Press Spacebar or Tap</div>
+          </div>
+
+          <canvas id="gameCanvas"></canvas>
+        </div>
+      </div>
+    </section>
+    <!-- END OF GAME SECTION -->
 
     <!-- CONTACT SECTION -->
     <section id="contact" class="animate-on-scroll">
