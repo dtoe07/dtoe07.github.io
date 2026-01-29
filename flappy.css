@@ -115,12 +115,12 @@
 #life-journey-section #memory-card {
   position: absolute;
   bottom: 20px;
-  left: 20px;
+  right: 20px; /* Adjusted to right */
   width: 140px;
   background: white;
   padding: 8px 8px 25px 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  transform: rotate(-3deg) translateY(150px);
+  transform: rotate(3deg) translateY(150px); /* Flipped rotation */
   transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   z-index: 20;
   border-radius: 2px;
@@ -129,7 +129,7 @@
 }
 
 #life-journey-section #memory-card.show {
-  transform: rotate(-3deg) translateY(0);
+  transform: rotate(3deg) translateY(0); /* Adjusted final rotation */
 }
 
 #life-journey-section #memory-img-container {
@@ -166,7 +166,7 @@
   #life-journey-section #memory-card {
     width: 100px;
     bottom: 10px;
-    left: 10px;
+    right: 10px; /* Adjusted to right */
   }
   #life-journey-section #memory-img-container {
     height: 70px;
