@@ -86,6 +86,37 @@ a {
   width: 100%;
 }
 
+.neon-btn {
+  color: #ffaa00;
+  border: 2px solid #ffaa00;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 0 5px #ffaa00, inset 0 0 5px #ffaa00;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  animation: rainbow-shift 4s linear infinite;
+}
+
+.neon-btn:hover {
+  background-color: #ffaa00;
+  color: #121212;
+  box-shadow: 0 0 10px #ffaa00, 0 0 20px #ffaa00, inset 0 0 10px #ffaa00;
+  /* Pause the color transition on hover to make it pop, or leave it running */
+}
+
+@keyframes rainbow-shift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
 /* -------- HERO SECTION -------- */
 
 #hero {
